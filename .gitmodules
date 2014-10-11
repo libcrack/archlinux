@@ -1,0 +1,3 @@
+[submodule "aurbs"]
+	path = aurbs
+	url = https://github.com/asdil12/aurbs.git
