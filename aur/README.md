@@ -11,6 +11,8 @@ Package list
 
 [gnome-paint-bzr-nosegfault](https://code.launchpad.net/~andrewwang43/gnome-paint)
 
+[hoppy](https://labs.portcullis.co.uk/tools/hoppy/)
+
 [pompem-git](https://github.com/rfunix/Pompem)
 
 [pretrace](https://github.com/robholland/pretrace)
