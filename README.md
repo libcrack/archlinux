@@ -1,4 +1,8 @@
 archlinux
 =========
 
-Arch Linux stuff
+Arch Linux stuff and AUR packages
+
+<https://aur.archlinux.org/packages?SeB=m&K=borja>
+
+

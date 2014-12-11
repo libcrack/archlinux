@@ -15,6 +15,8 @@ Package list
 
 [pretrace](https://github.com/robholland/pretrace)
 
+[ssl-cipher-suite-enum](https://labs.portcullis.co.uk/tools/ssl-cipher-suite-enum/)
+
 [python2-pwntools](https://github.com/Gallopsled/pwntools)
 
 [sysdig-git](https://github.com/draios/sysdig)

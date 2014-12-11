@@ -2,8 +2,8 @@
 # Maintainer: Borja Ruiz <borja [at] libcrack [dot] so> 
 # Copyright 2010 by Google Inc.
 pkgname="honggfuzz"
-pkgver=r66
-pkgrel=1
+pkgver=3.0
+pkgrel=2
 pkgdesc="A general-purpose, easy-to-use fuzzer with interesting analysis options."
 arch=('i686' 'x86_64')
 url="https://code.google.com/p/honggfuzz/"
