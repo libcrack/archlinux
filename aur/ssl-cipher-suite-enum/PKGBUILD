@@ -2,8 +2,8 @@
 pkgname=ssl-cipher-suite-enum
 pkgver=1.0.0
 pkgrel=1
-pkgdesc='ssl-cipher-suite-enum is a perl script to enumerate supported SSL cipher suites supported by network services (principally HTTPS)'
-arch=('i686' 'x86_64')
+pkgdesc='Perl script to enumerate supported SSL cipher suites supported by network services (principally HTTPS)'
+arch=('any')
 url='https://labs.portcullis.co.uk/tools/ssl-cipher-suite-enum/'
 license=('GPL2')
 depends=('perl')
