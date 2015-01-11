@@ -2,13 +2,13 @@
 pkgname=firefox-plugin-trezor
 pkgver=1.0.5
 pkgrel=1
-pkgdesc="The firefox browser plugin for Bitcoin Trezor hardware wallet"
+pkgdesc="The Firefox browser plugin for the TREZOR Bitcoin Hardware Wallet"
 arch=('i686' 'x86_64')
 url="https://mytrezor.com/"
 license=('unknown')
 makedepends=('rpmextract')
 depends=('firefox')
-provides=('browser-plugin-trezor')
+provides=('firefox-plugin-trezor')
 options=('emptydirs')
 source_x86_64=("https://mytrezor.com/data/plugin/1.0.5/browser-plugin-trezor-${pkgver}.x86_64.rpm")
 sha256sums_x86_64=('4df79f0c122adc44590d4dde82a31899a59307f24e285d2c980780f0b966fa5d')
