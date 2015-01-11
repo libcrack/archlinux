@@ -1,9 +1,8 @@
-# Maintainer: Fabian Schuh <mail@xeroc.org>
-# Mod 11/01/2015: Borja R <borja@libcrack.so>
-pkgname=browser-plugin-trezor
+# Mainteiner: Borja Ruiz <borja@libcrack.so>
+pkgname=firefox-plugin-trezor
 pkgver=1.0.5
 pkgrel=1
-pkgdesc="The Browser Plugin for the first Hardware Bitcoin Wallet."
+pkgdesc="The firefox browser plugin for Bitcoin Trezor hardware wallet"
 arch=('i686' 'x86_64')
 url="https://mytrezor.com/"
 license=('unknown')
