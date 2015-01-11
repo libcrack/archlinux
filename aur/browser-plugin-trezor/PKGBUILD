@@ -11,10 +11,10 @@ makedepends=('rpmextract')
 depends=('firefox')
 provides=('browser-plugin-trezor')
 options=('emptydirs')
-source_x86_64=("https://mytrezor.com/data/plugin/1.0.5/browser-plugin-trezor-${pkgver}.i386.rpm")
-sha256sums_x86_64=('41bc847ada77cd169f0c753c1e3f052216b2bbbbe30893db05f0a511e8675e18')
-source_i386=("https://mytrezor.com/data/plugin/1.0.5/browser-plugin-trezor-${pkgver}.x86_64.rpm")
-sha256sums_i386=('4df79f0c122adc44590d4dde82a31899a59307f24e285d2c980780f0b966fa5d')
+source_x86_64=("https://mytrezor.com/data/plugin/1.0.5/browser-plugin-trezor-${pkgver}.x86_64.rpm")
+sha256sums_x86_64=('4df79f0c122adc44590d4dde82a31899a59307f24e285d2c980780f0b966fa5d')
+source_i686=("https://mytrezor.com/data/plugin/1.0.5/browser-plugin-trezor-${pkgver}.i386.rpm")
+sha256sums_i686=('41bc847ada77cd169f0c753c1e3f052216b2bbbbe30893db05f0a511e8675e18')
 
 package() {
     cd ${srcdir}
@@ -24,6 +24,6 @@ package() {
         ${pkgdir}/usr/lib/udev/rules.d/51-trezor-udev.rules
 
     install -D -m 755 \
-        usr/lib/mozilla/plugins/npBitcoinTrezorPlugin.so \
+        usr/lib*/mozilla/plugins/npBitcoinTrezorPlugin.so \
         ${pkgdir}/usr/lib/mozilla/plugins/npBitcoinTrezorPlugin.so
 }
