@@ -27,7 +27,7 @@ package() {
   install -d -m 755 "${pkgdir}/usr/share/${pkgname}/icon"
   install -d -m 755 "${pkgdir}/usr/share/${pkgname}/shellcode_samples"
 
-  # god, forgive me for this xD
+  # ohmygod forgive me xD
   msg "Installing ${pkgname} launch script to ${pkgdir}/usr/bin/${pkgname}"
   cat >> "${pkgdir}/usr/bin/${pkgname}" << "EOF"
 #!/bin/sh
@@ -59,4 +59,4 @@ EOF
   install -c -m 644 shellcode_samples/krb1 "${pkgdir}/usr/share/${pkgname}/shellcode_samples"
 
 }
-
+# vim:set ts=2 sw=2 et:
