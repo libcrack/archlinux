@@ -7,12 +7,13 @@ _github_name=minilog
 pkgname="nodejs-${_npmname}-git"
 pkgver=2.0.6
 pkgrel=1
-pkgdesc=""
+pkgdesc="Lightweight client & server-side logging with Stream-API backends"
 arch=(any)
 url="https://github.com/${_github_user}/${_github_name}"
 license=('MIT')
 depends=('nodejs')
 provides=("nodejs-${_npmname}")
+groups=('devel')
 source=("$pkgname"::"git+https://github.com/${_github_user}/${_github_name}.git")
 sha1sums=('SKIP')
 
