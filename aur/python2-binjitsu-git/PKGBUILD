@@ -2,7 +2,7 @@
 _pkgname=binjitsu
 pkgname=python2-${_pkgname}-git
 pkgver=2.2.r134
-pkgrel=1
+pkgrel=2
 pkgdesc="CTF framework and exploit development library."
 arch=('any')
 url="https://binjitsu.readthedocs.org"
@@ -14,7 +14,6 @@ depends=('python2>=2.7' 'python2-mako' 'python2-paramiko'
 provides=('python2-binjitsu')
 conflicts=('python2-pwntools')
 replaces=('python2-pwntools')
-backup=()
 options=(!emptydirs)
 source=("${pkgname}"::'git+https://github.com/binjitsu/binjitsu.git')
 md5sums=('SKIP')
@@ -26,6 +25,7 @@ pkgver() {
 
 build() {
   cd "${srcdir}/${pkgname}"
+  sed -e 's/capstone==2.1/capstone/g' -i setup.py
   python2 setup.py build
 }
 
