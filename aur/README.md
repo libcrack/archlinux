@@ -9,6 +9,8 @@ Package list
 
 [apkstudio](https://apkstudio.codeplex.com)
 
+[binary-ninja](https://github.com/Vector35/binaryninja-python)
+
 [brother-dcpj552dw](http://www.brother.com)
 
 [exploitpack] (http://exploitpack.com)
