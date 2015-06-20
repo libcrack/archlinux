@@ -1,7 +1,7 @@
 # Maintainer: Borja Ruiz <borja [at] libcrack [dot] so>
 pkgname=shellter
 pkgver=3.1
-pkgrel=2
+pkgrel=1
 pkgdesc="Dynamic PE shellcode injection tool"
 arch=('i686' 'x86_64')
 url="https://www.shellterproject.com"
