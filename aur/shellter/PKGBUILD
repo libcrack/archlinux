@@ -9,7 +9,7 @@ license=('custom:license.txt')
 depends=('wine')
 provides=('shellter')
 source=("https://www.shellterproject.com/Downloads/Shellter/Latest/${pkgname}.zip")
-sha256sums=('46d1249c248c11559f30f5e65ca98cdeb16b9eebe9046abeacab6c42ff25bb37')
+sha256sums=('SKIP')
 DLAGENTS=("https::/usr/bin/curl -A Archlinux -k -o %o %u")
 
 build() {
