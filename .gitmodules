@@ -1,3 +1,6 @@
 [submodule "aurbs"]
 	path = aurbs
 	url = https://github.com/asdil12/aurbs.git
+[submodule "vps2arch"]
+	path = vps2arch
+	url = https://github.com/drizzt/vps2arch.git
