@@ -25,7 +25,7 @@ get_pkglist(){
     for core in ${corelist}; do
         bin="${core##*/}"
         bin="${bin%%.*}"
-        pkg=$(pacman -Qqo "${bin}" 2>/dev/null) || {
+        pkg=$(pacman -Qqo --color=never "${bin}" 2>/dev/null) || {
             echoerr "Package owner of ${bin} ${RED}NOT FOUND${RESET}"
             continue
         }
@@ -45,7 +45,7 @@ recompile_pkglist(){
         pkgdir="$(find "${ABSROOT}" -type d -name "${pkg}")"
         [[ -d "${pkgdir}" ]] || {
             echo "Cannot find ${pkg} directory in ${ABSROOT}"
-            pkgrepo="$(pacman -Si ${pkg} | grep ^Repo)" || {
+            pkgrepo="$(pacman -Si --color=never "${pkg}" | grep ^Repo)" || {
                 echoerr "Cannot find ${pkg} repository"
                 continue
             }
@@ -58,8 +58,8 @@ recompile_pkglist(){
         cd "${pkgdir}"
         grep '^options=' PKGBUILD | grep -q 'debug' && {
             echo "Detected debug options in ${pkgdir}/PKGBUILD"
-            pkg_inst_ver="$(pacman -Qi "$pkg" | grep '^Versi' | sed 's/^Versi.n\s*:\s//')"
-            pkg_repo_ver="$(pacman -Si "$pkg" | grep '^Versi' | sed 's/^Versi.n\s*:\s//')"
+            pkg_inst_ver="$(pacman -Qi --color=never "${pkg}" | grep '^Versi' | sed 's/^Versi.n\s*:\s//')"
+            pkg_repo_ver="$(pacman -Si --color=never "${pkg}" | grep '^Versi' | sed 's/^Versi.n\s*:\s//')"
             [[ "$pkg_inst_ver" == "$pkg_repo_ver" ]] && {
                 echo "Skipping build of ${pkg}: debug package already installed"
                 continue
@@ -88,6 +88,6 @@ recompile_pkglist
 
 echo "Finished"
 
-# /sbin/echo "pacman -S ${pkglist[@]}"
-# pacman -S ${pkglist[@]}
+# /sbin/echo "pacman -S --color=never ${pkglist[@]}"
+# pacman -S --color=never ${pkglist[@]}
 
