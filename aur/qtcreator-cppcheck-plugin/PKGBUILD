@@ -13,10 +13,12 @@ replaces=()
 provides=('qtcreator-cppcheck-plugin')
 conflicts=()
 makedepends=()
-source=("http://downloads.sourceforge.net/project/qtc-cppcheck/bin/QtcCppcheck-${pkgver}-linux-x64.tar.gz"
-        'https://raw.githubusercontent.com/OneMoreGres/qtc-cppcheck/master/LICENSE.md')
-sha256sums=('7c36d5e8459dd215492d8e579066032ffeca4868493acc32ea13b79be84d25c0'
-            '27c80d3595aca714fdbdbcf630664c70420f02651bac8190c1809a8b150c57b6')
+source=('https://raw.githubusercontent.com/OneMoreGres/qtc-cppcheck/master/LICENSE.md')
+source_i686=("http://downloads.sourceforge.net/project/qtc-cppcheck/bin/QtcCppcheck-${pkgver}-linux-x86.tar.gz")
+source_x86_64=("http://downloads.sourceforge.net/project/qtc-cppcheck/bin/QtcCppcheck-${pkgver}-linux-x64.tar.gz")
+sha256sums=('27c80d3595aca714fdbdbcf630664c70420f02651bac8190c1809a8b150c57b6')
+sha256sums_i686=('ab9025e96ba2f718ca10228a869a78816e6fd19a736a6da9ffc47915a63344f6')
+sha256sums_x86_64=('7c36d5e8459dd215492d8e579066032ffeca4868493acc32ea13b79be84d25c0')
 
 package() {
   cd "${srcdir}"
