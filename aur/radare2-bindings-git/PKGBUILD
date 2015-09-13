@@ -1,0 +1,57 @@
+# updated: dom sep 13 02:01:31 CEST 2015
+# updater: devnull [at] libcrack [dot] so
+pkgname='radare2-bindings-git'
+pkgver=20150913.530.359d0dd
+pkgrel=1
+pkgdesc="Language bindings for radare2 (git version)"
+arch=('i686' 'x86_64')
+url='https://radare.org'
+license=('LGPL')
+depends=('radare2')
+makedepends=('git' 'valabind' 'radare2')
+provides=('radare2-bindings')
+conflicts=('radare2-bindings')
+
+source=("$pkgname"::"git://github.com/radare/radare2-bindings.git")
+md5sums=('SKIP')
+
+pkgver () {
+  cd "${srcdir}/${pkgname}"
+  _date=`date +"%Y%m%d"`
+  echo "$_date.$(git rev-list --count master).$(git rev-parse --short master)"
+}
+
+
+build() {
+  cd "${srcdir}/${pkgname}"
+
+  msg "Configuring build"
+  ./configure \
+    --prefix="${pkgdir}/usr" \
+    --enable="python"
+
+  msg "Building bindings"
+  # PYTHON_CONFIG=python3-config make
+  make
+
+  msg "Building r2pipe python"
+  cd r2pipe/python && python setup.py build
+}
+
+package() {
+  cd "${srcdir}/${pkgname}"
+
+  msg "Installing python bindings"
+  #PYTHON_CONFIG=python3-config make install
+  make DESTDIR="${pkgdir}/" install
+
+  msg "Installing r2pipe python"
+  cd r2pipe/python \
+    && python setup.py install --root "${pkgdir}"
+
+  msg "Removing ${srcdir}/${pkgname}"
+  rm -rf ${srcdir}/${pkgname}
+
+}
+
+# vim:set ts=2 sw=2 et:
