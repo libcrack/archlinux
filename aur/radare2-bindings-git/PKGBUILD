@@ -1,7 +1,7 @@
 # updated: dom sep 13 02:01:31 CEST 2015
 # updater: devnull [at] libcrack [dot] so
 pkgname='radare2-bindings-git'
-pkgver=20150913.530.359d0dd
+pkgver=20151007.538.1f243fb
 pkgrel=1
 pkgdesc="Language bindings for radare2 (git version)"
 arch=('i686' 'x86_64')

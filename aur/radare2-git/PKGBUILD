@@ -1,6 +1,6 @@
 # with fixes by 0xAA <0xaa@dmg.sx>
 pkgname="radare2-git"
-pkgver=20150911.8962.ccc1668
+pkgver=20151007.9195.21406a9
 pkgrel=1
 pkgdesc="Open-source tools to disasm, debug, analyze and manipulate binary files"
 arch=('i686' 'x86_64')
@@ -28,7 +28,7 @@ build() {
     # you can comment this out, if you build in a clean environment
     export PKG_CONFIG_PATH="${srcdir}/${pkgname}/pkgcfg:${PKG_CONFIG_PATH}"
 
-	cd ${srcdir}/${pkgname}
+	cd "${srcdir}/${pkgname}"
 	# in theory explicitly passing --with-syscapstone shouldn't be needed
 	# anymore, as ./sys/build.sh checks for a suitable system wide capstone
 	# installation. Unfortunately linking syscapstone is broken and the
@@ -41,8 +41,8 @@ build() {
 }
 
 package() {
-    cd ${srcdir}/${pkgname}
+    cd "${srcdir}/${pkgname}"
     make DESTDIR=${pkgdir} install
     install -D -m644 man/* "${pkgdir}/usr/share/man/man1"
-    rm -rf ${srcdir}/${pkgname}
+    rm -rf "${srcdir}/${pkgname}"
 }

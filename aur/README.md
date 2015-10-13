@@ -15,7 +15,7 @@ Package list
 
 [ccdebug](http://ccdebug.sourceforge.net): A Qt-based graphical gdb debugger frontend.
 
-[exploitpack] (http://exploitpack.com): Open source exploit pack.
+[exploitpack](http://exploitpack.com): Open source exploit pack.
 
 [firefox-plugin-trezor](http://www.bitcointrezor.com): The Firefox browser plugin for the TREZOR Bitcoin Hardware Wallet.
 
