@@ -1,22 +1,24 @@
 # Maintainer: Borja Ruiz <borja [at] libcrack [dot] so>
-_pkgname="apkstudio"
+_pkgname='apkstudio'
 pkgname="${_pkgname}-git"
-pkgver=r2.b1e443a
+pkgver=3.0.0
 pkgrel=1
-pkgdesc="APK Studio is an IDE for decompiling/editing & then recompiling of android application binaries."
+pkgdesc='APK Studio is an IDE for decompiling/editing & then recompiling of android application binaries.'
 arch=('i686' 'x86_64')
-url="http://apkstudio.codeplex.com/"
+url='http://github.vaibhavpandey.com/apkstudio/'
 license=('GPL2')
 makedepends=('git' 'gcc' 'make')
 depends=('qt5-base')
 conflicts=('apkstudio')
 provides=('apkstudio')
-source=("$pkgname"::'git+https://git01.codeplex.com/apkstudio.git')
-md5sums=('SKIP')
+source=("$pkgname"::'git+https://github.com/vaibhavpandeyvpz/apkstudio.git'
+        'https://raw.githubusercontent.com/vaibhavpandeyvpz/apkstudio/master/external/vendor.zip')
+sha256sums=('SKIP' 'ac780fcde85563ad6d59491a653641a0c8b3b9360bbfa4e0710a6fb9b7ac3fd9')
 
 pkgver() {
   cd "${srcdir}/${pkgname}"
-  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  # printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  git describe --tags | sed -E 's/([^-]*-g)/r\1/;s/-/./g' | cut -f1-3 -d.
 }
 
 build() {
@@ -25,15 +27,17 @@ build() {
   #export QMAKESPEC=/usr/lib/qt/mkspecs/linux-g++
   #export QT_LIBRARY_PATH=/usr/include/qt
   cd "${srcdir}/${pkgname}"
-  mkdir build
-  cd build
-  qmake-qt5 -r ../apkstudio.pro || exit 1
+  lrelease-qt5 res/lang/en.ts || exit 1
+  mkdir build && cd build
+  qmake-qt5 -r ../apkstudio.pro CONFIG+=release || exit 1
   make || exit 1
 }
 
 package() {
   cd "${srcdir}/${pkgname}"
-  cd build
-  test -d "${pkgdir}/usr/bin/" || install -d "${pkgdir}/usr/bin/"
-  install -m 755 apkstudio "${pkgdir}/usr/bin/apkstudio" || exit 1
+  test -d "${pkgdir}/home/${USER}/.apkstudio/" || install -d -m755 "${pkgdir}/home/${USER}/.apkstudio/"
+  test -d "${pkgdir}/usr/bin/" || install -d -m755 "${pkgdir}/usr/bin/"
+  unzip "${srcdir}/vendor.zip" -d "${pkgdir}/home/${USER}/.apkstudio/vendor"
+  install -m755 "${srcdir}/${pkgname}/build/apkstudio" "${pkgdir}/usr/bin/apkstudio" || exit 1
 }
+# vim:set ts=2 sw=2 et:
