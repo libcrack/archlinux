@@ -1,0 +1,21 @@
+pkgbase = apkstudio-git
+	pkgdesc = APK Studio is an IDE for decompiling/editing & then recompiling of android application binaries.
+	pkgver = 3.0.0
+	pkgrel = 1
+	url = http://github.vaibhavpandey.com/apkstudio/
+	arch = i686
+	arch = x86_64
+	license = GPL2
+	makedepends = git
+	makedepends = gcc
+	makedepends = make
+	depends = qt5-base
+	provides = apkstudio
+	conflicts = apkstudio
+	source = apkstudio-git::git+https://github.com/vaibhavpandeyvpz/apkstudio.git
+	source = https://raw.githubusercontent.com/vaibhavpandeyvpz/apkstudio/master/external/vendor.zip
+	sha256sums = SKIP
+	sha256sums = ac780fcde85563ad6d59491a653641a0c8b3b9360bbfa4e0710a6fb9b7ac3fd9
+
+pkgname = apkstudio-git
+
