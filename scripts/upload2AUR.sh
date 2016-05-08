@@ -2,8 +2,9 @@
 # borja@libcrack.so
 # vie ago  1 01:37:56 CEST 2014
 
-username="borja"
-password="xxxxx"
+username='xxxxx'
+password='yyyyy'
+
 cwd="$PWD"
 
 which burp namcap mkaurball > /dev/null || exit "$?"
@@ -28,7 +29,7 @@ build(){
 upload(){
     local pkgsrc=$(find "$1" -name "*.src.tar.gz" -print0)
     echo "[*] Uploading $pkgsrc to AUR"
-    echo burp -u "$username" -p "$password" "$pkgsrc"
+    burp -u "$username" -p "$password" "$pkgsrc"
 }
 
 ftype=$(file -b "$1" | awk '{print $1}')
