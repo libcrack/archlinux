@@ -1,0 +1,45 @@
+# Last Modified: Tue Jan 24 17:04:48 2012
+#include <tunables/global>
+
+/usr/lib/firefox/firefox {
+  #include <abstractions/audio>
+  #include <abstractions/gnome>
+  #include <abstractions/nameservice>
+  #include <abstractions/ubuntu-browsers.d/plugins-common>
+
+
+  deny /dev/tty rw,
+
+  / r,
+  /bin/ps mrix,
+  /etc/** r,
+  /home/*/ r,
+  /home/*/.Xauthority r,
+  /home/*/.adobe/**/ rw,
+  /home/*/.asoundrc.asoundconf r,
+  /home/*/.icons/** r,
+  /home/*/.local/share/ r,
+  /home/*/.local/share/**/ r,
+  /home/*/.macromedia/** rw,
+  /home/*/.mozilla/**/ r,
+  /home/*/.mozilla/firefox/** mrwk,
+  /home/*/Desktop/ r,
+  /home/*/Desktop/** rwk,
+  /home/*/Downloads/ r,
+  /home/*/Downloads/** rwk,
+  /home/*/Temp/ r,
+  /home/*/Temp/** rwk,
+  /opt/java/** r,
+  /opt/kde/share/** r,
+  /proc/ r,
+  /proc/** r,
+  /sys/devices/system/cpu/ r,
+  /sys/devices/system/cpu/* r,
+  owner /tmp/** rlk,
+  /tmp/** w,
+  /usr/lib/firefox/plugin-container rix,
+  /usr/share/ r,
+  /usr/share/** r,
+  /var/db/nscd/* r,
+
+}

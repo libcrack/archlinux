@@ -1,0 +1,54 @@
+# Last Modified: Thu Jan 19 00:58:43 2012
+# ------------------------------------------------------------------
+#
+#    Copyright (C) 2002-2005 Novell/SUSE
+#
+#    This program is free software; you can redistribute it and/or
+#    modify it under the terms of version 2 of the GNU General Public
+#    License published by the Free Software Foundation.
+#
+# ------------------------------------------------------------------
+#
+
+#include <tunables/global>
+
+/usr/bin/man {
+  #include <abstractions/base>
+  #include <abstractions/bash>
+  #include <abstractions/consoles>
+  #include <abstractions/nameservice>
+  #include <abstractions/user-manpages>
+
+  capability setgid,
+  capability setuid,
+
+
+
+  /bin/less rix,
+  /etc/man_db.conf r,
+  /home/*/.lesshst rw,
+  /opt/java/jre/man/ r,
+  /opt/java/jre/man/* rk,
+  /opt/java/man/ r,
+  /opt/java/man/* rk,
+  /opt/java/man/*/ r,
+  /opt/kde/man/ r,
+  /opt/kde/man/*/ r,
+  /opt/qt/man/ r,
+  /opt/qt/man/* rk,
+  /opt/qt/man/*/ r,
+  /root/.lesshst rw,
+  /usr/bin/groff rix,
+  /usr/bin/locale rix,
+  /usr/bin/nroff rix,
+  /usr/bin/troff rix,
+  /usr/bin/grotty rix,
+  /usr/bin/preconv rix,
+  /usr/bin/tbl rix,
+  /usr/lib/man-db/man Px,
+  /usr/local/man/ r,
+  /usr/man/ r,
+  /usr/share/** r,
+  /var/cache/man/** rk,
+
+}
