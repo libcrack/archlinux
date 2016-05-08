@@ -1,6 +1,6 @@
 # with fixes by 0xAA <0xaa@dmg.sx>
 pkgname="radare2-git"
-pkgver=20160508.11128.5e1ad58
+pkgver=20151117.9709.8fbe365
 pkgrel=1
 pkgdesc="Open-source tools to disasm, debug, analyze and manipulate binary files"
 arch=('i686' 'x86_64')

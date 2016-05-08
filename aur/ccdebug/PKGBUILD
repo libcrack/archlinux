@@ -11,6 +11,7 @@ license=('LGPL')
 depends=('qt4' 'gdb')
 source=("http://prdownloads.sourceforge.net/project/ccdebug/${pkgname}_${pkgver}_src.tgz")
 md5sums=('db6eb7e5c8175bd61495ed40568eee5f')
+groups=('custom')
 
 prepare(){
   cd $srcdir/${pkgname}_${pkgver}
