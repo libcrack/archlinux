@@ -1,5 +1,5 @@
 #!/bin/bash
-# borja@libcrack.so
+# devnull@libcrack.so
 # vie ago  1 01:37:56 CEST 2014
 
 username='xxxxx'
