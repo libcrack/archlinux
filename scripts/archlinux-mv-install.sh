@@ -44,9 +44,86 @@ pacman-import(){
     xargs -a "$pkgfile" pacman -S --noconfirm --needed
 }
 
+archlinux_mv_rootfs(){
+#     --devices               preserve device files (super-user only)
+#     --specials              preserve special files
+# -D                          same as --devices --specials
+# -t, --times                 preserve modification times
+# -d, --dirs                  transfer directories without recursing
+# -l, --links                 copy symlinks as symlinks
+# -L, --copy-links            transform symlink into referent file/dir
+#     --copy-unsafe-links     only "unsafe" symlinks are transformed
+#     --safe-links            ignore symlinks that point outside the tree
+#     --munge-links           munge symlinks to make them safer
+# -k, --copy-dirlinks         transform symlink to dir into referent dir
+# -K, --keep-dirlinks         treat symlinked dir on receiver as dir
+# -H, --hard-links            preserve hard links
+#OPT="-rtDL"
+    local opt="-rDtlH"
+    local src="$1"
+    local dst="$2"
+
+    if [[ ! -d "$src" ]]; then
+        error "Cannot access srcdir $srcdir"
+        return 6
+    elif [[ ! -d "$dst" ]]; then
+        error "Cannot access dst $dstcdir"
+        return 7
+    fi
+
+    msg "Starting @ $(date)"
+
+    if [ -n "$DEBUG" ]; then
+        msg "SRC=$src"
+        msg "DST=$dst"
+        msg "EXC=$exc"
+    fi
+
+    msg "Syncing ${src} => ${dst}"
+
+    sudo rsync "${opt}" \
+        --exclude=${exc} ${src} ${dst} \
+        && success "No errors"  \
+        || error "Errors found"
+}
+_complete(){
+    COMPREPLY=();
+    local cur prev opts word;
+    cur="${COMP_WORDS[COMP_CWORD]}";
+    prev="${COMP_WORDS[COMP_CWORD-1]}";
+    opts="import export mvroot";
+    if [[ "${cur}" == -* ]]; then
+        COMPREPLY=($(compgen -W "${opts}" -- ${cur}));
+        return 0;
+    fi;
+    COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+}
+
+
+
 case "$1" in
-    import) info "Importing packages list"; pacman_import; exit 0;;
-    export) info "Exporting packages list"; pacman_export; exit 0;;
-    *) printf "Usage: $0 <import|export>\n" exit 1;;
+    import)
+        info "Importing packages list"
+        pacman_import
+        exit $?
+    ;;
+    export)
+        info "Exporting packages list"
+        pacman_export
+        exit $?
+    ;;
+    mvroot)
+        if [ ! -n $2 ] || [ ! -n $3 ] \
+        || [ ! -d $1 ] || [ ! -d $2] ; then
+            error "Usage: $0 mvroot srcdir dstdir"
+            exit 5
+        fi
+        info "Moving root filesystem"
+        archlinux_mv_rootfs "$1" "$2"
+        exit $?
+    ;;
+    *) printf "Usage: $0 import|export|mvroot <src> <dst>\n"
+       exit 1
+    ;;
 esac
 
