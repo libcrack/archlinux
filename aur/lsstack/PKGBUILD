@@ -1,0 +1,55 @@
+# Maintainer: Libcrack <archlinux [at] libcrack [dot] so>
+pkgname=lsstack
+pkgver=r6.8c94b74
+pkgrel=1
+pkgdesc='Obtain backtrace of a process.'
+arch=('i686' 'x86_64')
+url="http://sourceforge.net/projects/lsstack/"
+license=('GPL')
+#groups=()
+depends=('pacman')
+makedepends=('git')
+optdepends=()
+provides=('lsstack')
+conflicts=('lsstack')
+replaces=()
+#backup=()
+#options=()
+#install=
+changelog=
+#noextract=()
+#md5sums=() #autofill using updpkgsums
+#source=('git+https://github.com/a/b.git'
+#source=('git+https://github.com/a/b.git#branch=master'
+source=("$pkgname"::'git://github.com/vi/lsstack.git' 'lsstack.c.diff')
+md5sums=('SKIP' '034e7767919b5b6427d5e5c084a974ff')
+
+pkgver() {
+  cd "$srcdir/$pkgname"
+  local major="$(git rev-list --count HEAD)"
+  local minor="$(git rev-parse --short HEAD)"
+  printf "r%s.%s" "$major" "$minor"
+}
+
+prepare(){
+  cp ${pkgname}.c.diff "$srcdir/$pkgname/${pkgname}.c.diff"
+  cd "$srcdir/$pkgname"
+  patch < ${pkgname}.c.diff
+}
+
+build() {
+  cd "$srcdir/$pkgname"
+  # make
+  # CFLAGS=" -Wno-pointer-to-int-cast -Wno-int-to-pointer-cast" make
+  CFLAGS="-Wno-pointer-to-int-cast -Wno-int-to-pointer-cast"
+  LDFLAGS="-lbfd -liberty"
+  gcc $CFLAGS -g -c $LDFLAGS "${pkgname}.c"
+  gcc -g -o "$pkgname" "${pkgname}.o" $LDFLAGS
+
+}
+
+package() {
+  cd "$srcdir/$pkgname"
+  test -d "${pkgdir}/usr/bin/${pkgname}" ||  mkdir -p $_
+  install -m755 "${pkgname}" "${pkgdir}/usr/bin/${pkgname}"
+}

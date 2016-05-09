@@ -1,0 +1,35 @@
+diff --git a/lsstack.c b/lsstack.c
+index 898e598..b94e5ff 100644
+--- a/lsstack.c
++++ b/lsstack.c
+@@ -43,6 +43,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
+ 
+ #include <link.h>
+ 
++#define PACKAGE "lsstack" /* dummy to keep <bfd.h> happy */
+ #include <bfd.h>
+ 
+ #include <stddef.h>
+@@ -439,14 +440,22 @@ int grok_and_print_thread_stack(process_info *pi, int thepid)
+ 	TARGET_ADDRESS previous_bp;
+ 	TARGET_ADDRESS previous_ip;
+ 	/* Get the IP and the BP */
++#if defined(X32)
+ 	ret = read_target_userpointer(&ip,pi,thepid,EIP * pointer_size);
++#elif defined(X64)
++	ret = read_target_userpointer(&ip,pi,thepid,RIP * pointer_size);
++#endif
+ 	if (ret) {
+ 		if (debug_option) printf("Failed to read IP from target: %s\n", strerror(ret) );
+ 			return ret;
+ 	} else {
+ 		if (debug_option) printf("Read IP: 0x%x\n",ip);
+ 	}
++#if defined(X32)
+ 	ret = read_target_userpointer(&bp,pi,thepid,EBP * pointer_size);
++#elif defined(X64)
++	ret = read_target_userpointer(&bp,pi,thepid,RBP * pointer_size);
++#endif
+ 	if (ret) {
+ 		if (debug_option) printf("Failed to read BP from target: %s\n", strerror(ret) );
+ 			return ret;

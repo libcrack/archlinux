@@ -1,0 +1,10 @@
+lsstack
+*.deb
+.*.swp
+a
+backup-*
+*~
+debian/*.log
+debian/*.subvars
+debian/*/*
+packaging/*/*
