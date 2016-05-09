@@ -8,7 +8,7 @@ aurfile='/tmp/pacman.packages.aur'
 unkfile='/tmp/pacman.packages.unknown'
 
 trap captura INT
-captura(){ printf "\e[0;32m Ctrl+C: exiting\e[0m\n"; exit 1; }
+captura(){ printf "\e[0;31m Ctrl+C: exiting\e[0m\n"; exit 1; }
 
 error(){ printf "\e[0;31m[X]\e[0m ${@}\n" > /dev/stderr; }
 info() { printf "\e[0;32m[+]\e[0m ${@}\n" > /dev/stdout; }
@@ -45,20 +45,21 @@ pacman-import(){
 }
 
 archlinux_mv_rootfs(){
-#     --devices               preserve device files (super-user only)
-#     --specials              preserve special files
-# -D                          same as --devices --specials
-# -t, --times                 preserve modification times
-# -d, --dirs                  transfer directories without recursing
-# -l, --links                 copy symlinks as symlinks
-# -L, --copy-links            transform symlink into referent file/dir
-#     --copy-unsafe-links     only "unsafe" symlinks are transformed
-#     --safe-links            ignore symlinks that point outside the tree
-#     --munge-links           munge symlinks to make them safer
-# -k, --copy-dirlinks         transform symlink to dir into referent dir
-# -K, --keep-dirlinks         treat symlinked dir on receiver as dir
-# -H, --hard-links            preserve hard links
-#OPT="-rtDL"
+    # man(1) rsync
+    #     --devices               preserve device files (super-user only)
+    #     --specials              preserve special files
+    # -D                          same as --devices --specials
+    # -t, --times                 preserve modification times
+    # -d, --dirs                  transfer directories without recursing
+    # -l, --links                 copy symlinks as symlinks
+    # -L, --copy-links            transform symlink into referent file/dir
+    #     --copy-unsafe-links     only "unsafe" symlinks are transformed
+    #     --safe-links            ignore symlinks that point outside the tree
+    #     --munge-links           munge symlinks to make them safer
+    # -k, --copy-dirlinks         transform symlink to dir into referent dir
+    # -K, --keep-dirlinks         treat symlinked dir on receiver as dir
+    # -H, --hard-links            preserve hard links
+
     local opt="-rDtlH"
     local src="$1"
     local dst="$2"
