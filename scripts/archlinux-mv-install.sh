@@ -29,22 +29,27 @@ pacman_export(){
         | > "$unkfile"
 }
 
-pacman-import(){
-    if [ ! -f "$pkgfile" ]; then error "Cannot open $pkgfile"; exit 2; fi
-    if [ ! -f "$aurfile" ]; then error "Cannot open $aurfile"; exit 3; fi
-    if [ ! -f "$unkfile" ]; then error "Cannot open $unkfile"; exit 4; fi
-
-    info "Installing pacman packages from $pkgfile"
-    xargs -a "$pkgfile" pacman -S --noconfirm --needed
-
-    info "Installing AUR packages from $aurfile"
-    xargs -a "$pkgfile" pacman -S --noconfirm --needed
-
-    info "Installing unknown packages from $unkfile"
-    xargs -a "$pkgfile" pacman -S --noconfirm --needed
+pacman_import(){
+    pacman_import_check_file "$pkgfile"
+    pacman_import_check_file "$aurfile"
+    pacman_import_check_file "$unkfile"
 }
 
-archlinux_mv_rootfs(){
+pacman_import_check_file(){
+    local aurfile="$1"
+    if [ ! -f "$aurfile" ]; then
+        error "Cannot open $aurfile"
+        read -p "die?(y/n):" ask
+        case $ask in
+            n/N) warning "Continuing without $aurfile" ;;
+            *) exit 3;;
+        esac
+    else
+        info "Installing AUR packages from $aurfile"
+        xargs -a "$aurfile" pacman -S --noconfirm --needed
+    fi
+}
+archlinux_mvroot(){
     # man(1) rsync
     #     --devices               preserve device files (super-user only)
     #     --specials              preserve special files
@@ -77,7 +82,6 @@ archlinux_mv_rootfs(){
     if [ -n "$DEBUG" ]; then
         msg "SRC=$src"
         msg "DST=$dst"
-        msg "EXC=$exc"
     fi
 
     msg "Syncing ${src} => ${dst}"
@@ -100,8 +104,6 @@ _complete(){
     COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
 }
 
-
-
 case "$1" in
     import)
         info "Importing packages list"
@@ -120,7 +122,7 @@ case "$1" in
             exit 5
         fi
         info "Moving root filesystem"
-        archlinux_mv_rootfs "$1" "$2"
+        archlinux_mvroot "$1" "$2"
         exit $?
     ;;
     *) printf "Usage: $0 import|export|mvroot <src> <dst>\n"
