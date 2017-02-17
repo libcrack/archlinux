@@ -1,6 +1,7 @@
 # Maintainer: Borja Ruiz <borja [at] libcrack [dot] so>
-pkgname=ssl-cipher-suite-enum
-pkgver=1.0.0
+_pkgname='ssl-cipher-suite-enum'
+pkgname="${_pkgname}-git"
+pkgver=1.0.2
 pkgrel=1
 pkgdesc='Perl script to enumerate supported SSL cipher suites supported by network services (principally HTTPS)'
 arch=('any')
@@ -8,11 +9,23 @@ url='https://labs.portcullis.co.uk/tools/ssl-cipher-suite-enum/'
 license=('GPL2')
 depends=('perl')
 provides=('ssl-cipher-suite-enum')
-source=("https://labs.portcullis.co.uk/download/tools/ssl-cipher-suite-enum-v${pkgver}.tar.gz")
-sha256sums=('c4de0162b7ab2e7b3af44ed51b71623433ed792c1613a1b51a29e232dbd4c9ff')
+source=("$pkgname"::"git+https://github.com/portcullislabs/${_pkgname}.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "${srcdir}/${pkgname}"
+  grep '^my $VERSION' ${_pkgname}.pl | cut -f2 -d\"
+  # printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+  cd "${srcdir}/${pkgname}"
+}
 
 package() {
-  cd "${srcdir}/${pkgname}-v${pkgver}"
-  install -d 644 "${pkgdir}/usr/bin"
-  install -c -m 755 "${pkgname}.pl" "${pkgdir}/usr/bin"
+  cd "${srcdir}/${pkgname}"
+
+  test -d "${pkgdir}/usr/bin/" || install -d -m755 "${pkgdir}/usr/bin/"
+  install -c -m755 "${_pkgname}.pl" "${pkgdir}/usr/bin"
 }
+# vim:set ts=2 sw=2 et:
